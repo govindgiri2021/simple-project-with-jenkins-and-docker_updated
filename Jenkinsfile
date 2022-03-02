@@ -18,7 +18,7 @@ pipeline {
             steps {
            withDockerRegistry([ credentialsId: "dockerHub", url: "govindgiri2021/docker-compose-push-demo" ]) {
           sh  'docker push govindgiri2021/docker-compose-push-demo:latest'
-          #sh  'docker push nikhilnidhi/nginxtest:$BUILD_NUMBER' 
+       
         }
                   
           }
