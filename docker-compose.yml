@@ -1,12 +1,8 @@
-version: "3.7"
+version: "3.9"
 services:
-  customNginx:
-    build:
-      context: .
-      dockerfile: client/Dockerfile
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
     image: govindgiri2021/docker-compose-push-demo:v1
-  customHttpd:
-    build:
-      context: .
-      dockerfile: server/Dockerfile
-    image: govindgiri/docker-compose-push-demo:v1
