@@ -1,3 +1,2 @@
-echo 'FROM nginx:alpine
-RUN echo "nginx - Welcome to Docker Workshop!" >/usr/share/nginx/html/index.html
-CMD ["nginx", "-g", "daemon off;"] ' > client/Dockerfile
+FROM httpd:2.4
+COPY ./public-html/* /usr/local/apache2/htdocs/
