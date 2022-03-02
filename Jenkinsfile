@@ -33,7 +33,7 @@ pipeline {
 
             steps { 
                  sh 'docker login -u govindgiri2021 -p Govinda@01011993'
-                 dockerImage.push() 
+                 sh 'docker-compose push
 
            }
 
