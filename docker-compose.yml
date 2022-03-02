@@ -2,9 +2,11 @@ version: '3'
 services:
   client:
     build: ./client/
+    image: govindgiri2021/docker-compose-push-demo
     ports:
       - "80:80"
   server:
     build: ./server/
+    image: govindgiri2021/docker-compose-push-demo
     ports:
       - "8081:8081"
