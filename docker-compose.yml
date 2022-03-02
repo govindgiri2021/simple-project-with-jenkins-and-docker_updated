@@ -4,7 +4,9 @@ services:
     build: ./client/
     ports:
       - "80:80"
+    image: govindgiri2021/docker-compose-push-demo:image1
   server:
     build: ./server/
     ports:
       - "8081:8081"
+    image: govindgiri2021/docker-compose-push-demo:image2
