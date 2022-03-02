@@ -1,3 +1,11 @@
-echo 'FROM httpd:alpine
-RUN echo "httpd - Welcome to Docker Workshop!" > /usr/local/apache2/htdocs/index.html
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"] ' > server/Dockerfile_httpd
+# syntax=docker/dockerfile:1
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+EXPOSE 5000
+COPY . .
+CMD ["flask", "run"]
