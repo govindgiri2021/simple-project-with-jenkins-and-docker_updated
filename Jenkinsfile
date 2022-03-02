@@ -1,31 +1,64 @@
-pipeline {
+pipeline { 
+
     environment { 
+
         registry = "govindgiri2021/docker-compose-push-demo" 
+
         registryCredential = 'dockerhub' 
+
+        dockerImage = '' 
+
     }
-    agent any
+
+    agent any 
+
+    stages { 
+
     
-     stages {
-            stage('Staging') {
-            steps {
-                sh 'sudo docker-compose build'
-               
-              }
+        stage('Building our image') { 
+
+            steps { 
+
+                script { 
+
+                    dockerImage = sh 'sudo docker-compose build' registry + ":$BUILD_NUMBER" 
+
+               }
+
+            } 
+
+        }
+
+        stage('Deploy our image') { 
+
+            steps { 
+
+                script { 
+
+                    docker.withRegistry( '', registryCredential ) { 
+
+                        dockerImage.push() 
+
+                    }
+
+                } 
+
+           }
+
+        } 
+
+        stage('Cleaning up') { 
+
+            steps { 
+
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+
             }
-          }
-          stage('Publish image to Docker Hub') {
-          
-            steps {
-           withDockerRegistry([ credentialsId: "dockerHub", url: "govindgiri2021/docker-compose-push-demo" ]) {
-          sh  'docker push govindgiri2021/docker-compose-push-demo:latest'
-       
-        }
-                  
-          }
-        }
-              
-      }
+
+        } 
+
     }
-  }
+
 }
-}
+
+
