@@ -18,12 +18,7 @@ pipeline {
         stage('Building our image') { 
 
             steps { 
-
-                script { 
-
-                    dockerImage = sh 'sudo docker-compose build' registry + ":$BUILD_NUMBER" 
-
-               }
+                sh 'sudo docker-compose build'
 
             } 
 
